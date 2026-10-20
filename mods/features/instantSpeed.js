@@ -3,7 +3,7 @@
     if (window.ttInstantSpeed) return;
     let hideTimer;
 
-    function rememberSpeed(speed) {
+    function setSetting(name, value) {
         // Use the upstream command handler so its in-memory config, settings menu,
         // localStorage and next-video canplay handler all see the same value.
         for (const key in (window._yttv || {})) {
@@ -12,8 +12,8 @@
                 instance.resolveCommand({
                     setClientSettingEndpoint: {
                         settingDatas: [{
-                            clientSettingEnum: { item: 'videoSpeed' },
-                            intValue: String(speed)
+                            clientSettingEnum: { item: name },
+                            ...(typeof value === 'boolean' ? { boolValue: value } : { intValue: String(value) })
                         }]
                     }
                 });
@@ -40,6 +40,11 @@
     }
 
     window.ttInstantSpeed = {
+        configureAndroidAddon() {
+            // This separately signed app is updated by rebuilding the fork. The
+            // stock updater downloads a different package and must not prompt.
+            setSetting('enableUpdater', false);
+        },
         adjust(direction) {
             const video = document.querySelector('video');
             if (!video || video.readyState === 0) return;
@@ -47,7 +52,7 @@
             const speed = Math.min(5, Math.max(.25,
                 (Math.round(video.playbackRate * 4) + direction) / 4));
             video.playbackRate = speed;
-            rememberSpeed(speed);
+            setSetting('videoSpeed', speed);
             showSpeed(speed);
         }
     };
