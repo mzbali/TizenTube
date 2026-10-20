@@ -12,6 +12,7 @@ import "./features/adblock.js";
 import "./features/sponsorblock.js";
 import "./ui/ui.js";
 import "./ui/speedUI.js";
+import "./features/instantSpeed.js";
 import "./ui/theme.js";
 import "./ui/settings.js";
 import "./ui/disableWhosWatching.js";
