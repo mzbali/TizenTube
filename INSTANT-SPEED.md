@@ -6,7 +6,7 @@ Android add-on in `mzbali/TizenTubeCobalt/custom-build`.
 
 The native bridge calls `window.ttInstantSpeed.adjust(-1)` for YouTube and
 `adjust(1)` for Netflix. Each press changes the actual video playback rate by
-0.25x, clamped to 0.25x–5x, saves through the existing TizenTube command handler,
+0.25x, clamped to 0.25x–2x, saves through the existing TizenTube command handler,
 and shows an unobtrusive 1.1-second corner badge. It does not pause playback,
 move focus, open menus, or depend on a network request per press.
 

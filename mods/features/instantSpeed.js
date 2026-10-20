@@ -49,7 +49,7 @@
             const video = document.querySelector('video');
             if (!video || video.readyState === 0) return;
             if (direction !== -1 && direction !== 1) return;
-            const speed = Math.min(5, Math.max(.25,
+            const speed = Math.min(2, Math.max(.25,
                 (Math.round(video.playbackRate * 4) + direction) / 4));
             video.playbackRate = speed;
             setSetting('videoSpeed', speed);
